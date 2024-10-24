@@ -23,32 +23,26 @@ def reset_timer():
 def display_starttime():
     global repeat
     repeat+=1
-    # worktime_secs=WORK_MIN*60
-    # short_breaksecs=SHORT_BREAK_MIN*60
-    # long_breaksecs=LONG_BREAK_MIN*60    
-    worktime_secs=10
-    short_breaksecs=4
-    long_breaksecs=8
+    worktime_secs=WORK_MIN*60
+    short_breaksecs=SHORT_BREAK_MIN*60
+    long_breaksecs=LONG_BREAK_MIN*60    
+    # worktime_secs=10
+    # short_breaksecs=4
+    # long_breaksecs=8
   
     if  repeat%2!=0 and repeat<=7:
         print(f"work:{worktime_secs}") 
         Label.config(title_label,text="WORK",fg=GREEN)  
-        countdown(worktime_secs)
-        print(repeat)      
+        countdown(worktime_secs)  
         
        
     if repeat%2==0 and repeat<7:
-        print(repeat)
         Label.config(title_label,text="S_BREAK",fg=RED)  
-        countdown(short_breaksecs)
-        print(f"sb:{short_breaksecs}") 
+        countdown(short_breaksecs)       
         check_mark=Label(text="✅",fg=GREEN)
-        check_mark.grid(column=repeat-1,row=3)
+        check_mark.grid(column=1,row=3)
          
     if repeat==8:    
-        print(f"longbrkrep={repeat}")
-        print(f"llb:{long_breaksecs}")  
-        # Label(text="S_BREAK",font=(FONT_NAME,'45','bold'),fg=PINK)
         Label.config(title_label,text="L_BREAK",fg=PINK)
         countdown(long_breaksecs)       
         
@@ -62,7 +56,6 @@ def countdown(total_seconds):
         secs=total_seconds%60
         mins=total_seconds//60
         timer=f'{mins:02d}:{secs:02d}'
-        # print(timer)
         canvas.itemconfig(timer_text,text=timer)
         time_loop=tkwindow.after(1000,countdown,total_seconds-1)
     if total_seconds==0:
